@@ -1,1 +1,23 @@
-/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+$lc-app-primary: mat-palette($mat-brown);
+$lc-app-accent: mat-palette($mat-blue-grey, A200, A100, A400);
+
+$lc-app-warn: mat-palette($mat-red);
+
+$lc-app-theme: mat-dark-theme($lc-app-primary, $lc-app-accent, $lc-app-warn);
+
+@include angular-material-theme($lc-app-theme);
+
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
