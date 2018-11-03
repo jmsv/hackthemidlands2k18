@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css?family=Podkova:700');
+
+.controls {
+  height: 80%;
+  align-content: center;
+  vertical-align: middle;
+}
+
+$size: 400px;
+$dropSize: 15px;
+$color: #f74d4d;
+$color2: #f86569;
+$dropColor: #e24f4f;
+
+.fire-button-container {
+  margin: auto;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.fire-button {
+  margin: auto;
+  width: $size;
+  height: $size - $size/10;
+  line-height: $size*0.9;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 50%;
+  background: $color;
+
+  div {
+    user-select: none;
+    font-size: 80px;
+    color: white;
+    font-family: 'Podkova', serif;
+  }
+
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, $color), color-stop(100%, $color2));
+
+  box-shadow: 0 $dropSize $dropColor;
+
+  &.active {
+    box-shadow: 0 0 $dropColor;
+    transform: translate(0px, $dropSize);
+    transition: 0.1s all ease-out;
+  }
+}

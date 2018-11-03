@@ -6,10 +6,12 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import MaterialModule from './material-module';
+import { ControlComponent } from './control/control.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ControlComponent
   ],
   imports: [
     BrowserModule,
