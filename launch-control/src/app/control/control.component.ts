@@ -1,5 +1,5 @@
 import { Component, OnInit, HostListener, Inject } from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import axios from 'axios';
 
@@ -18,8 +18,29 @@ export class ControlComponent implements OnInit {
   token: string;
   fireSelected: Boolean = false;
   primingToken: String = '';
+  requestId: String = '';
 
   constructor(public dialog: MatDialog) { }
+
+  finalise() {
+    axios.post('http://internet-of-flings.com/api/verifyCode', {
+      tfa_code: this.token,
+      request_id: this.requestId
+    })
+      .then(res => {
+        console.log(res.data);
+        if (res.data.message === 'TFA code is correct') {
+          axios.post('http://internet-of-flings.com/api/enable', {
+            tfa_token: res.data.tfa_token,
+            priming_token: this.primingToken
+          })
+            .then(res2 => {
+              console.log(res2.data);
+              console.log('trebuchet fired! maybe');
+            });
+        }
+      });
+  }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(Dialog2FAComponent, {
@@ -28,8 +49,11 @@ export class ControlComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.token = result;
+      console.log('The dialog was closed with', result);
+      if (result) {
+        this.token = result.token;
+        this.finalise();
+      }
     });
   }
 
@@ -59,8 +83,14 @@ export class ControlComponent implements OnInit {
       priming_code: this.launchCode
     }).then(res => {
       console.log(res.data);
-      this.primingToken = res.data;
+      this.primingToken = res.data.priming_token;
     });
+
+    axios.get('http://internet-of-flings.com/api/getCode')
+      .then(res => {
+        console.log(res.data);
+        this.requestId = res.data.request_id;
+      });
   }
 
   unfire() {
@@ -80,7 +110,7 @@ export class ControlComponent implements OnInit {
 export class Dialog2FAComponent {
   constructor(
     public dialogRef: MatDialogRef<Dialog2FAComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
   onNoClick(): void {
     this.dialogRef.close();
