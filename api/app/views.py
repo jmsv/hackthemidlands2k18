@@ -10,7 +10,7 @@ CORS(app)
 
 # Activate the siege weapon...
 # No turning back now.
-@app.route('/enable', methods=['POST'])
+@app.route('/api/enable', methods=['POST'])
 def enable():
     body = request.get_json()
     # Validate the their token.
@@ -47,7 +47,7 @@ def enable():
 
 # Two factor  
 
-@app.route('/getCode')
+@app.route('/api/getCode')
 def getCode():
     nexmoTFA = utils.get_nexmo_tfa()
     request_id = nexmoTFA.getCode(app.config['TFA_NUMBER'])
@@ -58,7 +58,7 @@ def getCode():
         }
     )
 
-@app.route('/verifyCode', methods=['POST'])
+@app.route('/api/verifyCode', methods=['POST'])
 def verifyCode():
     body = request.get_json()
 
@@ -90,7 +90,7 @@ def verifyCode():
 
 # Get a token to use. You get one by sending the priming code as a post
 # request
-@app.route('/getToken', methods=['POST'])
+@app.route('/api/getToken', methods=['POST'])
 def getToken():
     body = request.get_json()
     if 'priming_code' not in body:
@@ -117,7 +117,7 @@ def getToken():
         }
     )
 
-@app.route('/')
+@app.route('/api/')
 def index_page():
     return json.dumps(
         {
