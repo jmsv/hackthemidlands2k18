@@ -1,4 +1,5 @@
 future==0.17.1
 iso8601==0.1.12
+paho-mqtt==1.4.0
 pyserial==3.4
 PyYAML==3.13

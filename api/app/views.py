@@ -1,10 +1,11 @@
 from flask import Flask, request
 import json
-
 from flask_cors import CORS
 
-from app import utils
+from app import utils, job
 from . import app, redis_store
+
+import threading
 
 CORS(app)
 
@@ -37,6 +38,10 @@ def enable():
             }
         )
     # Send a message to the controller.
+
+    threading.Thread(
+        target=job.enable
+    ).start()
 
     # Done!
     return json.dumps(
