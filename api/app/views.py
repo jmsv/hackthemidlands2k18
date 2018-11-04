@@ -1,8 +1,12 @@
 from flask import Flask, request
 import json
 
+from flask_cors import CORS
+
 from app import utils
 from . import app, redis_store
+
+CORS(app)
 
 # Activate the siege weapon...
 # No turning back now.
