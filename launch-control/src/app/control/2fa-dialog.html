@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>2FA</h1>
+<div mat-dialog-content>
+  <p>To fire your trebuchet, please supply your 2FA token; we've texted you a code</p>
+
+  <p>Thank you for securing your IoT Trebuchet™ - you're helping prevent war amongst our village!</p>
+  <mat-form-field class="full-width">
+    <input cdkFocusInitial matInput [(ngModel)]="data.token">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onNoClick()">Retreat</button>
+  <button mat-button [mat-dialog-close]="data">FIRE!</button>
+</div>
