@@ -3,10 +3,15 @@
 .controls {
   height: 80%;
   align-content: center;
-  vertical-align: middle;
+  text-align: center;
 }
 
-$size: 400px;
+.launch-code {
+  width: 200px;
+  margin: auto;
+}
+
+$size: 300px;
 $dropSize: 15px;
 $color: #f74d4d;
 $color2: #f86569;
@@ -15,8 +20,7 @@ $dropColor: #e24f4f;
 .fire-button-container {
   margin: auto;
   position: relative;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 5%;
 }
 
 .fire-button {

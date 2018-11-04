@@ -1,4 +1,9 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, Inject } from '@angular/core';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+
+export interface DialogData {
+  token: string;
+}
 
 @Component({
   selector: 'app-control',
@@ -7,27 +12,31 @@ import { Component, OnInit, HostListener } from '@angular/core';
 })
 export class ControlComponent implements OnInit {
 
-  constructor() { }
+  launchCode: String = '';
+  token: string;
+  fireSelected: Boolean = false;
 
-  fireSelected = false;
+  constructor(public dialog: MatDialog) { }
 
-  @HostListener('document:keyup', ['$event'])
-  handleKeyboardEvent(event: KeyboardEvent) {
-    console.log(event);
+  openDialog(): void {
+    const dialogRef = this.dialog.open(Dialog2FAComponent, {
+      width: '600px',
+      data: { name: this.token }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.token = result;
+    });
   }
 
   @HostListener('document:keyup', ['$event'])
   @HostListener('document:keydown', ['$event'])
   trigger(event) {
-    console.log(event);
     if (
       event.type === 'mousedown'
       || event.type === 'keydown'
-      && (
-        event.code === 'Enter'
-        || event.code === 'Space'
-        || event.code === 'KeyF'
-      )
+      && event.code === 'Enter'
     ) {
       console.log('fire!');
       this.fire();
@@ -38,6 +47,10 @@ export class ControlComponent implements OnInit {
 
   fire() {
     this.fireSelected = true;
+    setTimeout(() => {
+      this.openDialog();
+      this.fireSelected = false;
+    }, 200);
   }
 
   unfire() {
@@ -46,5 +59,20 @@ export class ControlComponent implements OnInit {
 
   ngOnInit() {
   }
+}
 
+
+@Component({
+  selector: 'app-2fa-dialog',
+  styleUrls: ['2fa-dialog.css'],
+  templateUrl: '2fa-dialog.html',
+})
+export class Dialog2FAComponent {
+  constructor(
+    public dialogRef: MatDialogRef<Dialog2FAComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 }

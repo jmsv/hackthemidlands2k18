@@ -2,7 +2,7 @@
 
 @include mat-core();
 
-$lc-app-primary: mat-palette($mat-brown);
+$lc-app-primary: mat-palette($mat-red);
 $lc-app-accent: mat-palette($mat-blue-grey, A200, A100, A400);
 
 $lc-app-warn: mat-palette($mat-red);
@@ -16,6 +16,7 @@ html,
 body {
   height: 100%;
   background: #222;
+  color: white;
 }
 
 body {

@@ -1,5 +1,9 @@
 <div class="controls">
 
+  <mat-form-field class="launch-code">
+    <input matInput placeholder="LAUNCH CODE" [(ngModel)]="launchCode" />
+  </mat-form-field>
+
   <div class="fire-button-container">
     <div class="fire-button" [class.active]="fireSelected" (mousedown)="trigger($event)" (mouseup)="trigger($event)">
       <div>FIRE</div>
