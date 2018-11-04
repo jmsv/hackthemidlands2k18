@@ -2,25 +2,24 @@
 
 .controls {
   height: 80%;
-  align-content: center;
-  text-align: center;
 }
 
 .launch-code {
-  width: 200px;
+  width: 300px;
   margin: auto;
+  margin-top: 10px;
 }
 
 $size: 300px;
 $dropSize: 15px;
-$color: #f74d4d;
-$color2: #f86569;
-$dropColor: #e24f4f;
+$color: #e71818;
+$color2: #db3338;
+$dropColor: #c90d0d;
 
 .fire-button-container {
-  margin: auto;
   position: relative;
-  top: 5%;
+  display: inline-block;
+  margin-top: 40px;
 }
 
 .fire-button {

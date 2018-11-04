@@ -1,3 +1,27 @@
-<mat-toolbar>James' Siege Dashboard</mat-toolbar>
+<div class="half">
+  <h1>Welcome back, James</h1>
 
-<router-outlet></router-outlet>
+  <mat-toolbar color=primary>Your Siege Dashboard</mat-toolbar>
+
+  <p style="width:68%;">From this dashboard you can control your fleet of IoT-powered siege devices!</p>
+
+  <br>
+  <hr>
+
+  <mat-card class="trebuchet">
+
+    <h2 style="display:inline-block;">Your Trebuchet</h2>
+    <mat-chip-list class="chippy">
+      <mat-chip>NEW!</mat-chip>
+    </mat-chip-list>
+
+    <p class="description">The superior siege weapon</p>
+
+    <p>Use the panel on the right to control your weapon</p>
+
+  </mat-card>
+</div>
+
+<div class="half">
+  <router-outlet></router-outlet>
+</div>

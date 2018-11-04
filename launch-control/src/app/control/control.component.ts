@@ -1,6 +1,8 @@
 import { Component, OnInit, HostListener, Inject } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
+import axios from 'axios';
+
 export interface DialogData {
   token: string;
 }
@@ -15,6 +17,7 @@ export class ControlComponent implements OnInit {
   launchCode: String = '';
   token: string;
   fireSelected: Boolean = false;
+  primingToken: String = '';
 
   constructor(public dialog: MatDialog) { }
 
@@ -51,6 +54,13 @@ export class ControlComponent implements OnInit {
       this.openDialog();
       this.fireSelected = false;
     }, 200);
+
+    axios.post('http://internet-of-flings.com/api/getToken', {
+      priming_code: this.launchCode
+    }).then(res => {
+      console.log(res.data);
+      this.primingToken = res.data;
+    });
   }
 
   unfire() {

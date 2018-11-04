@@ -1,0 +1,19 @@
+.half {
+  width: calc(40% - 8px);
+  float: left;
+  padding: 5%;
+  border: solid rgb(70, 70, 70) 4px;
+  min-height: calc(80% - 8px);
+}
+
+.chippy {
+  float: right;
+}
+
+.trebuchet {
+  margin-top: 5%;
+}
+
+.description {
+  font-style: italic;
+}
